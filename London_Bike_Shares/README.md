@@ -1,21 +1,21 @@
 Data Gathering and Manipulation:
 This repository encompasses a project centered around the "London bike sharing dataset" sourced from Kaggle. The dataset has been meticulously processed and manipulated utilizing the Pandas library in Python. 
+
 Visualization:
 Following the comprehensive manipulation of the dataset, a refined version has been exported to Tableau. Leveraging the capabilities of Tableau, I have meticulously crafted five enriched visualizations, offering insightful perspectives on the underlying data.
 
-  
     
 1. #importing the pandas library
 import pandas as pd
 #reading the csv file
 bikes = pd.read_csv('london_merged.csv')
 
-2. # exploring the data
+3. #exploring data
 bikes.info()
 RangeIndex: 17414 entries, 0 to 17413
 Data columns (total 10 columns):
- #   Column        Non-Null Count  Dtype  
----  ------        --------------  -----  
+    #Column        Non-Null Count  Dtype  
+ 
  0   timestamp     17414 non-null  object 
  1   cnt           17414 non-null  int64  
  2   t1            17414 non-null  float64
@@ -45,7 +45,7 @@ timestamp	cnt	t1	t2	hum	wind_speed	weather_code	is_holiday	is_weekend	season
 17413	2017-01-03 23:00:00	139	5.0	1.0	76.0	22.0	2.0	0.0	0.0	3.0
 17414 rows × 10 columns
 
-3. # Lets counts the unique values in weather_code
+3. #Counts the unique values in weather_code
 bikes.weather_code.value_counts()
 1.0     6150
 2.0     4034
@@ -56,7 +56,7 @@ bikes.weather_code.value_counts()
 10.0      14
 Name: weather_code, dtype: int64
 
-4. # Lets counts the unique values in season column
+4. #Counts the unique values in season column
 bikes.season.value_counts()
 0.0    4394
 1.0    4387
@@ -80,7 +80,7 @@ new_cols_dict = {
 bikes.rename(new_cols_dict, axis=1 , inplace = True)
 bikes.humidity_percent = bikes.humidity_percent / 100
 
-6. # changing the vales to text for better understanding
+6. #changing the values to text for better understanding
 season_dict = {
     "0.0": "spring",
     "1.0": "summer",
@@ -107,7 +107,7 @@ bikes.weather = bikes.weather.astype('str')
 #mapping the weather to the actual written season
 bikes.weather = bikes.weather.map(weather_dict)
 
-9. # checking the dataframe
+9. #checking the dataframe
 bikes.head()
 time	count	temp_real_C	temp_feels_like_C	humidity_percent	wind_speed_kph	weather	is_holiday	is_weekend	season
 0	2015-01-04 00:00:00	182	3.0	2.0	0.000093	6.0	Broken clouds	0.0	1.0	winter
@@ -116,6 +116,6 @@ time	count	temp_real_C	temp_feels_like_C	humidity_percent	wind_speed_kph	weather
 3	2015-01-04 03:00:00	72	2.0	2.0	0.000100	0.0	Clear	0.0	1.0	winter
 4	2015-01-04 04:00:00	47	2.0	0.0	0.000093	6.5	Clear	0.0	1.0	winter
 
-10. # exporting the data 
+10. #exporting the data 
 bikes.to_excel("london_bikes_final.xlsx", sheet_name="Data")
   
